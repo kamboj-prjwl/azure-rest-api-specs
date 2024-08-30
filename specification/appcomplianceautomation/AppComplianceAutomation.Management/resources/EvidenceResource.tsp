@@ -110,14 +110,4 @@ interface Evidence {
 );
 @@doc(Evidence.download::parameters.body, "Parameters for the query operation");
 
-@@encodedName(Evidence.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-
-@@OpenAPI.extension(Evidence.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "properties"
-);
-
-@@clientName(Evidence.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Evidence.createOrUpdate::parameters.resource, "properties");

@@ -65,8 +65,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/PortalTenantCompileFileProperties"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {

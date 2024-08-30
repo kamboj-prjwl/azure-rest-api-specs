@@ -82,16 +82,6 @@ interface ScopingConfiguration {
   "Parameters for the create or update operation, this is a singleton resource, so please make sure you're using 'default' as the name."
 );
 
-@@encodedName(ScopingConfiguration.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-
-@@OpenAPI.extension(ScopingConfiguration.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "properties"
-);
-
 @@clientName(ScopingConfiguration.createOrUpdate::parameters.resource,
-  "parameters"
+  "properties"
 );

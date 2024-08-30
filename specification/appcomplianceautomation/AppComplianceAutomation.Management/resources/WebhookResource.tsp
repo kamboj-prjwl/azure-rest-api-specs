@@ -103,19 +103,4 @@ interface Webhook {
   "Parameters for the create or update operation"
 );
 
-@@encodedName(Webhook.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-
-@@encodedName(Webhook.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-
-@@OpenAPI.extension(Webhook.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "properties"
-);
-
 @@clientName(Webhook.createOrUpdate::parameters.resource, "parameters");

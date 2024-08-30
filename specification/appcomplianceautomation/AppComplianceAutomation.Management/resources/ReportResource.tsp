@@ -162,17 +162,8 @@ interface Report {
 @@doc(Report.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@encodedName(Report.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
 
-@@OpenAPI.extension(Report.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "properties"
-);
-
-@@clientName(Report.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Report.createOrUpdate::parameters.resource, "properties");
 
 @@doc(Report.update::parameters.properties,
   "Parameters for the create or update operation"

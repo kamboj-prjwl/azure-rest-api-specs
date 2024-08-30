@@ -199,14 +199,13 @@
             "$ref": "#/parameters/OldTestRunIdQueryParam"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TestRunCreateOrUpdate"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -1015,14 +1014,13 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TestCreateOrUpdate"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {

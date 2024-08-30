@@ -59,14 +59,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -102,14 +101,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/GetCollectionCountRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -145,14 +143,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/GetOverviewStatusRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -188,14 +185,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ListInUseStorageAccountsRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -234,14 +230,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/OnboardRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -435,14 +430,13 @@
             "pattern": "^[-a-zA-Z0-9_]{1,50}$"
           },
           {
-            "name": "parameters",
+            "name": "properties",
             "in": "body",
             "description": "Parameters for the create or update operation",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ReportResource"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -501,14 +495,13 @@
             "pattern": "^[-a-zA-Z0-9_]{1,50}$"
           },
           {
-            "name": "parameters",
+            "name": "properties",
             "in": "body",
             "description": "Parameters for the create or update operation",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ReportResourcePatch"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -624,14 +617,13 @@
             "pattern": "^[-a-zA-Z0-9_]{1,50}$"
           },
           {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
             "description": "NameAvailabilityRequest object.",
             "required": true,
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -807,14 +799,13 @@
             "pattern": "^[a-zA-Z0-9-_.]+$"
           },
           {
-            "name": "parameters",
+            "name": "properties",
             "in": "body",
             "description": "Parameters for the create or update operation",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EvidenceResource"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -919,14 +910,13 @@
             "pattern": "^[a-zA-Z0-9-_.]+$"
           },
           {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
             "description": "Parameters for the query operation",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EvidenceFileDownloadRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -1169,14 +1159,13 @@
             "pattern": "^[a-zA-Z0-9_]*$"
           },
           {
-            "name": "parameters",
+            "name": "properties",
             "in": "body",
             "description": "Parameters for the create or update operation, this is a singleton resource, so please make sure you're using 'default' as the name.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScopingConfigurationResource"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -1395,14 +1384,13 @@
             "pattern": "^[a-zA-Z0-9-_]{1,64}$"
           },
           {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
             "description": "Parameters for the query operation",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SnapshotDownloadRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -1473,14 +1461,13 @@
             "pattern": "^[-a-zA-Z0-9_]{1,50}$"
           },
           {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
             "description": "Parameters for synchronize certification record operation",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SyncCertRecordRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -1727,8 +1714,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WebhookResource"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -1784,14 +1770,13 @@
             "pattern": "^[-a-zA-Z0-9_]{1,50}$"
           },
           {
-            "name": "parameters",
+            "name": "properties",
             "in": "body",
             "description": "Parameters for the create or update operation",
             "required": true,
             "schema": {
               "$ref": "#/definitions/WebhookResourcePatch"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -1874,14 +1859,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TriggerEvaluationRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -2513,8 +2497,7 @@
         "properties": {
           "$ref": "#/definitions/EvidenceProperties",
           "description": "Evidence property.",
-          "x-ms-client-flatten": true,
-          "x-ms-client-name": "properties"
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -3278,8 +3261,7 @@
         "properties": {
           "$ref": "#/definitions/ReportProperties",
           "description": "Report property.",
-          "x-ms-client-flatten": true,
-          "x-ms-client-name": "properties"
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -3920,8 +3902,7 @@
         "properties": {
           "$ref": "#/definitions/ScopingConfigurationProperties",
           "description": "ScopingConfiguration property.",
-          "x-ms-client-flatten": true,
-          "x-ms-client-name": "properties"
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -4114,8 +4095,7 @@
         "properties": {
           "$ref": "#/definitions/SnapshotProperties",
           "description": "Snapshot's property.",
-          "x-ms-client-flatten": true,
-          "x-ms-client-name": "properties"
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -4391,8 +4371,7 @@
         "properties": {
           "$ref": "#/definitions/WebhookProperties",
           "description": "Webhook property.",
-          "x-ms-client-flatten": true,
-          "x-ms-client-name": "properties"
+          "x-ms-client-flatten": true
         }
       },
       "required": [

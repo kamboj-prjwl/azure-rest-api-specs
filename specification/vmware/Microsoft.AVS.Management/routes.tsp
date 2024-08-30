@@ -107,14 +107,6 @@ interface PrivateClouds {
   >;
 }
 
-@@encodedName(PrivateClouds.createOrUpdate::parameters.resource,
-  "application/json",
-  "privateCloud"
-);
-@@OpenAPI.extension(PrivateClouds.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "privateCloud"
-);
 @@clientName(PrivateClouds.createOrUpdate::parameters.resource, "privateCloud");
 
 @armResourceOperations
@@ -173,14 +165,6 @@ interface Clusters {
   listZones is ArmResourceActionSyncNoRequestBody<Cluster, ClusterZoneList>;
 }
 
-@@encodedName(Clusters.createOrUpdate::parameters.resource,
-  "application/json",
-  "cluster"
-);
-@@OpenAPI.extension(Clusters.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "cluster"
-);
 @@clientName(Clusters.createOrUpdate::parameters.resource, "cluster");
 
 @armResourceOperations
@@ -206,15 +190,7 @@ interface Datastores {
   delete is ArmResourceDeleteAsync<Datastore>;
 }
 
-@@encodedName(Datastores.createOrUpdate::parameters.resource,
-  "application/json",
-  "datastore"
-);
 @@clientName(Datastores.createOrUpdate::parameters.resource, "datastore");
-@@OpenAPI.extension(Datastores.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "datastore"
-);
 
 @armResourceOperations
 interface HcxEnterpriseSites {
@@ -232,15 +208,7 @@ interface HcxEnterpriseSites {
   delete is ArmResourceDeleteSync<HcxEnterpriseSite>;
 }
 
-@@encodedName(HcxEnterpriseSites.createOrUpdate::parameters.resource,
-  "application/json",
-  "hcxEnterpriseSite"
-);
 @@clientName(HcxEnterpriseSites.createOrUpdate::parameters.resource,
-  "hcxEnterpriseSite"
-);
-@@OpenAPI.extension(HcxEnterpriseSites.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
   "hcxEnterpriseSite"
 );
 
@@ -268,15 +236,7 @@ interface Authorizations {
   delete is ArmResourceDeleteAsync<ExpressRouteAuthorization>;
 }
 
-@@encodedName(Authorizations.createOrUpdate::parameters.resource,
-  "application/json",
-  "authorization"
-);
 @@clientName(Authorizations.createOrUpdate::parameters.resource,
-  "authorization"
-);
-@@OpenAPI.extension(Authorizations.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
   "authorization"
 );
 
@@ -303,15 +263,7 @@ interface GlobalReachConnections {
   delete is ArmResourceDeleteAsync<GlobalReachConnection>;
 }
 
-@@encodedName(GlobalReachConnections.createOrUpdate::parameters.resource,
-  "application/json",
-  "globalReachConnection"
-);
 @@clientName(GlobalReachConnections.createOrUpdate::parameters.resource,
-  "globalReachConnection"
-);
-@@OpenAPI.extension(GlobalReachConnections.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
   "globalReachConnection"
 );
 
@@ -363,28 +315,11 @@ interface WorkloadNetworkSegments {
   deleteSegment is ArmResourceDeleteAsync<WorkloadNetworkSegment>;
 }
 
-@@encodedName(WorkloadNetworkSegments.create::parameters.resource,
-  "application/json",
-  "workloadNetworkSegment"
-);
 @@clientName(WorkloadNetworkSegments.create::parameters.resource,
-  "workloadNetworkSegment"
-);
-@@OpenAPI.extension(WorkloadNetworkSegments.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkSegment"
-);
-
-@@encodedName(WorkloadNetworkSegments.update::parameters.properties,
-  "application/json",
   "workloadNetworkSegment"
 );
 @@clientName(WorkloadNetworkSegments.update::parameters.properties,
   "application/json",
-  "workloadNetworkSegment"
-);
-@@OpenAPI.extension(WorkloadNetworkSegments.update::parameters.properties,
-  "x-ms-client-name",
   "workloadNetworkSegment"
 );
 
@@ -432,39 +367,13 @@ interface WorkloadNetworkDhcpConfigurations {
   delete is ArmResourceDeleteAsync<WorkloadNetworkDhcp>;
 }
 
-@@encodedName(WorkloadNetworkDhcpConfigurations.create::parameters.resource,
-  "application/json",
-  "workloadNetworkDhcp"
-);
 @@clientName(WorkloadNetworkDhcpConfigurations.create::parameters.resource,
   "workloadNetworkDhcp"
 );
-@@OpenAPI.extension(WorkloadNetworkDhcpConfigurations.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkDhcp"
-);
-
-@@encodedName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
-  "application/json",
-  "workloadNetworkDhcp"
-);
 @@clientName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
   "workloadNetworkDhcp"
 );
-@@OpenAPI.extension(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
-  "x-ms-client-name",
-  "workloadNetworkDhcp"
-);
-
-@@encodedName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
-  "application/json",
-  "workloadNetworkDhcp"
-);
 @@clientName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
-  "workloadNetworkDhcp"
-);
-@@OpenAPI.extension(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
-  "x-ms-client-name",
   "workloadNetworkDhcp"
 );
 
@@ -540,27 +449,11 @@ interface WorkloadNetworkPortMirroringProfiles {
     | ErrorResponse;
 }
 
-@@encodedName(WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
-  "application/json",
-  "workloadNetworkPortMirroring"
-);
 @@clientName(WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
   "workloadNetworkPortMirroring"
 );
-@@OpenAPI.extension(WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkPortMirroring"
-);
 
-@@encodedName(WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
-  "application/json",
-  "workloadNetworkPortMirroring"
-);
 @@clientName(WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
-  "workloadNetworkPortMirroring"
-);
-@@OpenAPI.extension(WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
-  "x-ms-client-name",
   "workloadNetworkPortMirroring"
 );
 
@@ -619,28 +512,12 @@ interface WorkloadNetworkVmGroups {
     | ErrorResponse;
 }
 
-@@encodedName(WorkloadNetworkVmGroups.create::parameters.resource,
-  "application/json",
-  "workloadNetworkVMGroup"
-);
 @@clientName(WorkloadNetworkVmGroups.create::parameters.resource,
   "application/json",
   "workloadNetworkVMGroup"
 );
-@@OpenAPI.extension(WorkloadNetworkVmGroups.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkVMGroup"
-);
 
-@@encodedName(WorkloadNetworkVmGroups.update::parameters.properties,
-  "application/json",
-  "workloadNetworkVMGroup"
-);
 @@clientName(WorkloadNetworkVmGroups.update::parameters.properties,
-  "workloadNetworkVMGroup"
-);
-@@OpenAPI.extension(WorkloadNetworkVmGroups.update::parameters.properties,
-  "x-ms-client-name",
   "workloadNetworkVMGroup"
 );
 
@@ -722,27 +599,11 @@ interface WorkloadNetworkDnsServices {
     | ErrorResponse;
 }
 
-@@encodedName(WorkloadNetworkDnsServices.create::parameters.resource,
-  "application/json",
-  "workloadNetworkDnsService"
-);
 @@clientName(WorkloadNetworkDnsServices.create::parameters.resource,
   "workloadNetworkDnsService"
 );
-@@OpenAPI.extension(WorkloadNetworkDnsServices.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkDnsService"
-);
 
-@@encodedName(WorkloadNetworkDnsServices.update::parameters.properties,
-  "application/json",
-  "workloadNetworkDnsService"
-);
 @@clientName(WorkloadNetworkDnsServices.update::parameters.properties,
-  "workloadNetworkDnsService"
-);
-@@OpenAPI.extension(WorkloadNetworkDnsServices.update::parameters.properties,
-  "x-ms-client-name",
   "workloadNetworkDnsService"
 );
 
@@ -801,27 +662,10 @@ interface WorkloadNetworkDnsZones {
     | ErrorResponse;
 }
 
-@@encodedName(WorkloadNetworkDnsZones.create::parameters.resource,
-  "application/json",
-  "workloadNetworkDnsZone"
-);
 @@clientName(WorkloadNetworkDnsZones.create::parameters.resource,
   "workloadNetworkDnsZone"
 );
-@@OpenAPI.extension(WorkloadNetworkDnsZones.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkDnsZone"
-);
-
-@@encodedName(WorkloadNetworkDnsZones.update::parameters.properties,
-  "application/json",
-  "workloadNetworkDnsZone"
-);
 @@clientName(WorkloadNetworkDnsZones.update::parameters.properties,
-  "workloadNetworkDnsZone"
-);
-@@OpenAPI.extension(WorkloadNetworkDnsZones.update::parameters.properties,
-  "x-ms-client-name",
   "workloadNetworkDnsZone"
 );
 
@@ -874,15 +718,7 @@ interface WorkloadNetworkPublicIps {
     | ErrorResponse;
 }
 
-@@encodedName(WorkloadNetworkPublicIps.create::parameters.resource,
-  "application/json",
-  "workloadNetworkPublicIP"
-);
 @@clientName(WorkloadNetworkPublicIps.create::parameters.resource,
-  "workloadNetworkPublicIP"
-);
-@@OpenAPI.extension(WorkloadNetworkPublicIps.create::parameters.resource,
-  "x-ms-client-name",
   "workloadNetworkPublicIP"
 );
 
@@ -909,15 +745,7 @@ interface CloudLinks {
   delete is ArmResourceDeleteAsync<CloudLink>;
 }
 
-@@encodedName(CloudLinks.createOrUpdate::parameters.resource,
-  "application/json",
-  "cloudLink"
-);
 @@clientName(CloudLinks.createOrUpdate::parameters.resource, "cloudLink");
-@@OpenAPI.extension(CloudLinks.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "cloudLink"
-);
 
 @armResourceOperations
 interface Addons {
@@ -942,15 +770,7 @@ interface Addons {
   delete is ArmResourceDeleteAsync<Addon>;
 }
 
-@@encodedName(Addons.createOrUpdate::parameters.resource,
-  "application/json",
-  "addon"
-);
 @@clientName(Addons.createOrUpdate::parameters.resource, "addon");
-@@OpenAPI.extension(Addons.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "addon"
-);
 
 @armResourceOperations
 interface VirtualMachines {
@@ -1032,15 +852,7 @@ interface PlacementPolicies {
   delete is ArmResourceDeleteAsync<PlacementPolicy>;
 }
 
-@@encodedName(PlacementPolicies.createOrUpdate::parameters.resource,
-  "application/json",
-  "placementPolicy"
-);
 @@clientName(PlacementPolicies.createOrUpdate::parameters.resource,
-  "placementPolicy"
-);
-@@OpenAPI.extension(PlacementPolicies.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
   "placementPolicy"
 );
 
@@ -1104,15 +916,7 @@ interface ScriptExecutions {
   ): ArmResponse<ScriptExecution> | ErrorResponse;
 }
 
-@@encodedName(ScriptExecutions.createOrUpdate::parameters.resource,
-  "application/json",
-  "scriptExecution"
-);
 @@clientName(ScriptExecutions.createOrUpdate::parameters.resource,
-  "scriptExecution"
-);
-@@OpenAPI.extension(ScriptExecutions.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
   "scriptExecution"
 );
 

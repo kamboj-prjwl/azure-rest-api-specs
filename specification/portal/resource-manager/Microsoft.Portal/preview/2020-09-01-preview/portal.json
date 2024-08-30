@@ -239,14 +239,13 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "dashboard",
+            "name": "resource",
             "in": "body",
             "description": "The parameters required to create or update a dashboard.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Dashboard"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -302,14 +301,13 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "dashboard",
+            "name": "properties",
             "in": "body",
             "description": "The updatable fields of a Dashboard.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PatchableDashboard"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
