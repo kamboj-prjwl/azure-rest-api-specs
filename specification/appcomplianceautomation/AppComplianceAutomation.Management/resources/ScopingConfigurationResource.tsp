@@ -52,28 +52,28 @@ interface ScopingConfiguration {
   /**
    * Get the AppComplianceAutomation scoping configuration of the specific report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("ScopingConfiguration_Get")
   get is ArmResourceRead<ScopingConfigurationResource>;
 
   /**
    * Get the AppComplianceAutomation scoping configuration of the specific report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("ScopingConfiguration_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ScopingConfigurationResource>;
 
   /**
    * Clean the AppComplianceAutomation scoping configuration of the specific report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("ScopingConfiguration_Delete")
   delete is ArmResourceDeleteSync<ScopingConfigurationResource>;
 
   /**
    * Returns a list format of the singleton scopingConfiguration for a specified report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("ScopingConfiguration_List")
   list is ArmResourceListByParent<ScopingConfigurationResource>;
 }

@@ -51,21 +51,21 @@ interface Webhook {
   /**
    * Get the AppComplianceAutomation webhook and its properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Webhook_Get")
   get is ArmResourceRead<WebhookResource>;
 
   /**
    * Create a new AppComplianceAutomation webhook or update an exiting AppComplianceAutomation webhook.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Webhook_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<WebhookResource>;
 
   /**
    * Update an exiting AppComplianceAutomation webhook.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @parameterVisibility
   @operationId("Webhook_Update")
   update is ArmCustomPatchSync<
@@ -78,14 +78,14 @@ interface Webhook {
   /**
    * Delete an AppComplianceAutomation webhook.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Webhook_Delete")
   delete is ArmResourceDeleteSync<WebhookResource>;
 
   /**
    * Get the AppComplianceAutomation webhook list.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Webhook_List")
   list is ArmResourceListByParent<
     WebhookResource,

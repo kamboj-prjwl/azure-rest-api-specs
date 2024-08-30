@@ -45,14 +45,14 @@ interface Snapshot {
   /**
    * Get the AppComplianceAutomation snapshot and its properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Snapshot_Get")
   get is ArmResourceRead<SnapshotResource>;
 
   /**
    * Get the AppComplianceAutomation snapshot list.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Snapshot_List")
   list is ArmResourceListByParent<
     SnapshotResource,
@@ -65,7 +65,7 @@ interface Snapshot {
   /**
    * Download compliance needs from snapshot, like: Compliance Report, Resource List.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Snapshot_Download")
   download is ArmResourceActionAsync<
     SnapshotResource,

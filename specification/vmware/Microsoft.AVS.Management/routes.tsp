@@ -37,7 +37,7 @@ interface Locations {
 alias PrivateCloudList = ResourceList<PrivateCloud>;
 @armResourceOperations
 interface PrivateClouds {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("PrivateClouds_List")
   list is ArmResourceListByParent<
     PrivateCloud,
@@ -119,7 +119,7 @@ interface PrivateClouds {
 
 @armResourceOperations
 interface Clusters {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("Clusters_List")
   list is ArmResourceListByParent<
     Cluster,
@@ -185,7 +185,7 @@ interface Clusters {
 
 @armResourceOperations
 interface Datastores {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("Datastores_List")
   list is ArmResourceListByParent<
     Datastore,
@@ -218,7 +218,7 @@ interface Datastores {
 
 @armResourceOperations
 interface HcxEnterpriseSites {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("HcxEnterpriseSites_List")
   list is ArmResourceListByParent<
     HcxEnterpriseSite,
@@ -246,7 +246,7 @@ interface HcxEnterpriseSites {
 
 @armResourceOperations
 interface Authorizations {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("Authorizations_List")
   list is ArmResourceListByParent<
     ExpressRouteAuthorization,
@@ -282,7 +282,7 @@ interface Authorizations {
 
 @armResourceOperations
 interface GlobalReachConnections {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("GlobalReachConnections_List")
   list is ArmResourceListByParent<
     GlobalReachConnection,
@@ -317,11 +317,11 @@ interface GlobalReachConnections {
 
 @armResourceOperations
 interface WorkloadNetworks {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_Get")
   get is ArmResourceRead<WorkloadNetwork>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_List")
   list is ArmResourceListByParent<
     WorkloadNetwork,
@@ -331,18 +331,18 @@ interface WorkloadNetworks {
 
 @armResourceOperations
 interface WorkloadNetworkSegments {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListSegments")
   list is ArmResourceListByParent<
     WorkloadNetworkSegment,
     Response = ArmResponse<ResourceList<WorkloadNetworkSegment, "{name}sList">>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetSegment")
   get is ArmResourceRead<WorkloadNetworkSegment>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateSegments")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -351,14 +351,14 @@ interface WorkloadNetworkSegments {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateSegments")
   @parameterVisibility
   update is ArmCustomPatchAsync<WorkloadNetworkSegment, WorkloadNetworkSegment>;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeleteSegment")
   deleteSegment is ArmResourceDeleteAsync<WorkloadNetworkSegment>;
 }
@@ -391,7 +391,7 @@ interface WorkloadNetworkSegments {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 // @armResourceOperations
 interface WorkloadNetworkDhcpConfigurations {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListDhcp")
   list is ArmResourceListByParent<
     WorkloadNetworkDhcp,
@@ -399,7 +399,7 @@ interface WorkloadNetworkDhcpConfigurations {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DhcpIdParameter should be last, but it is breaking to correct it."
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetDhcp")
   // get is ArmResourceRead<WorkloadNetworkDhcp>;
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}")
@@ -411,7 +411,7 @@ interface WorkloadNetworkDhcpConfigurations {
     ...PrivateCloudNameParameter,
   ): ArmResponse<WorkloadNetworkDhcp> | ErrorResponse;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateDhcp")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -420,14 +420,14 @@ interface WorkloadNetworkDhcpConfigurations {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDhcp")
   @parameterVisibility
   update is ArmCustomPatchAsync<WorkloadNetworkDhcp, WorkloadNetworkDhcp>;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeleteDhcp")
   delete is ArmResourceDeleteAsync<WorkloadNetworkDhcp>;
 }
@@ -470,14 +470,14 @@ interface WorkloadNetworkDhcpConfigurations {
 
 @armResourceOperations
 interface WorkloadNetworkGateways {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListGateways")
   list is ArmResourceListByParent<
     WorkloadNetworkGateway,
     Response = ArmResponse<ResourceList<WorkloadNetworkGateway>>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetGateway")
   get is ArmResourceRead<WorkloadNetworkGateway>;
 }
@@ -487,18 +487,18 @@ interface WorkloadNetworkGateways {
 // @armResourceOperations
 @doc("Workload Network Port Mirroring Profiles")
 interface WorkloadNetworkPortMirroringProfiles {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListPortMirroring")
   list is ArmResourceListByParent<
     WorkloadNetworkPortMirroring,
     Response = ArmResponse<ResourceList<WorkloadNetworkPortMirroring>>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetPortMirroring")
   get is ArmResourceRead<WorkloadNetworkPortMirroring>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreatePortMirroring")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -507,7 +507,7 @@ interface WorkloadNetworkPortMirroringProfiles {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdatePortMirroring")
   @parameterVisibility
   update is ArmCustomPatchAsync<
@@ -516,7 +516,7 @@ interface WorkloadNetworkPortMirroringProfiles {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "PortMirroringProfileParameter should be last, but it is breaking to correct it."
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeletePortMirroring")
   // delete is ArmResourceDeleteAsync<WorkloadNetworkPortMirroring>;
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}")
@@ -569,18 +569,18 @@ interface WorkloadNetworkPortMirroringProfiles {
 // @armResourceOperations
 @doc("Workload Network VM Groups")
 interface WorkloadNetworkVmGroups {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListVMGroups")
   list is ArmResourceListByParent<
     WorkloadNetworkVMGroup,
     Response = ArmResponse<ResourceList<WorkloadNetworkVMGroup, "{name}sList">>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetVMGroup")
   get is ArmResourceRead<WorkloadNetworkVMGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateVMGroup")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -589,13 +589,13 @@ interface WorkloadNetworkVmGroups {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateVMGroup")
   @parameterVisibility
   update is ArmCustomPatchAsync<WorkloadNetworkVMGroup, WorkloadNetworkVMGroup>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "VmGroupIdParameter should be last, but it is breaking to correct it."
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeleteVMGroup")
   // delete is ArmResourceDeleteAsync<WorkloadNetworkVMGroup>;
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}")
@@ -646,7 +646,7 @@ interface WorkloadNetworkVmGroups {
 
 @armResourceOperations
 interface WorkloadNetworkVirtualMachines {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListVirtualMachines")
   list is ArmResourceListByParent<
     WorkloadNetworkVirtualMachine,
@@ -656,7 +656,7 @@ interface WorkloadNetworkVirtualMachines {
     >>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetVirtualMachine")
   get is ArmResourceRead<WorkloadNetworkVirtualMachine>;
 }
@@ -666,7 +666,7 @@ interface WorkloadNetworkVirtualMachines {
 // @armResourceOperations
 @doc("Workload Network Dns Services")
 interface WorkloadNetworkDnsServices {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListDnsServices")
   list is ArmResourceListByParent<
     WorkloadNetworkDnsService,
@@ -676,11 +676,11 @@ interface WorkloadNetworkDnsServices {
     >>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetDnsService")
   get is ArmResourceRead<WorkloadNetworkDnsService>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateDnsService")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -689,7 +689,7 @@ interface WorkloadNetworkDnsServices {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsService")
   @parameterVisibility
   update is ArmCustomPatchAsync<
@@ -698,7 +698,7 @@ interface WorkloadNetworkDnsServices {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DnsServiceIdParameter should be last, but it is breaking to correct it."
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeleteDnsService")
   // delete is ArmResourceDeleteAsync<WorkloadNetworkDnsService>;
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}")
@@ -751,18 +751,18 @@ interface WorkloadNetworkDnsServices {
 // @armResourceOperations
 @doc("Workload Network DNS Zones")
 interface WorkloadNetworkDnsZones {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListDnsZones")
   list is ArmResourceListByParent<
     WorkloadNetworkDnsZone,
     Response = ArmResponse<ResourceList<WorkloadNetworkDnsZone, "{name}sList">>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetDnsZone")
   get is ArmResourceRead<WorkloadNetworkDnsZone>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateDnsZone")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -771,13 +771,13 @@ interface WorkloadNetworkDnsZones {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsZone")
   @parameterVisibility
   update is ArmCustomPatchAsync<WorkloadNetworkDnsZone, WorkloadNetworkDnsZone>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DnsZoneIdParameter should be last, but it is breaking to correct it."
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeleteDnsZone")
   // delete is ArmResourceDeleteAsync<WorkloadNetworkDnsZone>;
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}")
@@ -829,18 +829,18 @@ interface WorkloadNetworkDnsZones {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 // @armResourceOperations
 interface WorkloadNetworkPublicIps {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListPublicIPs")
   list is ArmResourceListByParent<
     WorkloadNetworkPublicIP,
     Response = ArmResponse<ResourceList<WorkloadNetworkPublicIP, "{name}sList">>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetPublicIP")
   get is ArmResourceRead<WorkloadNetworkPublicIP>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreatePublicIP")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -850,7 +850,7 @@ interface WorkloadNetworkPublicIps {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "PublicIPIdParameter should be last, but it is breaking to correct it."
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeletePublicIP")
   // delete is ArmResourceDeleteAsync<WorkloadNetworkPublicIP>;
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}")
@@ -888,7 +888,7 @@ interface WorkloadNetworkPublicIps {
 
 @armResourceOperations
 interface CloudLinks {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("CloudLinks_List")
   list is ArmResourceListByParent<
     CloudLink,
@@ -921,7 +921,7 @@ interface CloudLinks {
 
 @armResourceOperations
 interface Addons {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("Addons_List")
   list is ArmResourceListByParent<
     Addon,
@@ -954,7 +954,7 @@ interface Addons {
 
 @armResourceOperations
 interface VirtualMachines {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("VirtualMachines_List")
   list is ArmResourceListByParent<
     VirtualMachine,
@@ -979,7 +979,7 @@ interface VirtualMachines {
 
 @armResourceOperations
 interface PlacementPolicies {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("PlacementPolicies_List")
   list is ArmResourceListByParent<
     PlacementPolicy,
@@ -1046,7 +1046,7 @@ interface PlacementPolicies {
 
 @armResourceOperations
 interface ScriptPackages {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("ScriptPackages_List")
   list is ArmResourceListByParent<
     ScriptPackage,
@@ -1058,7 +1058,7 @@ interface ScriptPackages {
 
 @armResourceOperations
 interface ScriptCmdlets {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("ScriptCmdlets_List")
   list is ArmResourceListByParent<
     ScriptCmdlet,
@@ -1070,7 +1070,7 @@ interface ScriptCmdlets {
 
 @armResourceOperations
 interface ScriptExecutions {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("ScriptExecutions_List")
   list is ArmResourceListByParent<
     ScriptExecution,
