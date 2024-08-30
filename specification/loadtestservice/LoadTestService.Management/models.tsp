@@ -188,7 +188,6 @@ model QuotaResource is ProxyResource<QuotaResourceProperties> {
   @key("quotaBucketName")
   @path
   @segment("quotas")
-  @extension("x-ms-parameter-location", "method")
   name: string;
 }
 

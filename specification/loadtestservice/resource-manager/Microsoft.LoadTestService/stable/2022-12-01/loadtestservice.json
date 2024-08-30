@@ -189,8 +189,7 @@
             "in": "path",
             "description": "The quota name.",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           }
         ],
         "responses": {
@@ -236,18 +235,16 @@
             "in": "path",
             "description": "The quota name.",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           },
           {
-            "name": "QuotaBucketRequest",
+            "name": "body",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/QuotaBucketRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -382,14 +379,13 @@
             "type": "string"
           },
           {
-            "name": "LoadTestResource",
+            "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -457,14 +453,13 @@
             "type": "string"
           },
           {
-            "name": "LoadTestResourcePatchRequestBody",
+            "name": "properties",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LoadTestResourceUpdate"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
