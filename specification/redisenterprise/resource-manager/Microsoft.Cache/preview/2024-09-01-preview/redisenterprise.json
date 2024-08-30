@@ -2273,8 +2273,7 @@
           "default": "default",
           "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$",
           "x-ms-mutability": [
-            "read",
-            "update"
+            "read"
           ]
         },
         "user": {
