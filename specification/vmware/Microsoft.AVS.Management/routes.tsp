@@ -60,6 +60,7 @@ interface PrivateClouds {
 
   // This could be modeled with ArmCustomPatchAsync if a 202 response with no body is used instead of a 201.
   // update is ArmCustomPatchAsync<PrivateCloud, PrivateCloudUpdate>;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("Update a PrivateCloud")
   @extension("x-ms-long-running-operation", true)
   @extension(
@@ -129,6 +130,7 @@ interface Clusters {
 
   // This could be modeled with ArmCustomPatchAsync if a 202 response with no body is used instead of a 201.
   // update is ArmCustomPatchAsync<Cluster, ClusterUpdate>;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("Update a Cluster")
   @extension("x-ms-long-running-operation", true)
   @extension(
@@ -426,6 +428,7 @@ interface WorkloadNetworkPortMirroringProfiles {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "PortMirroringProfileParameter should be last, but it is breaking to correct it."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @operationId("WorkloadNetworks_DeletePortMirroring")
   // delete is ArmResourceDeleteAsync<WorkloadNetworkPortMirroring>;
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}")
@@ -784,6 +787,7 @@ interface VirtualMachines {
   get is ArmResourceRead<VirtualMachine>;
 
   // restrictMovement should be a ArmResourceActionNoContentAsync, but does not respond with a 204.
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("Enable or disable DRS-driven VM movement restriction")
   @armResourceAction(Location)
   @post
@@ -821,6 +825,7 @@ interface PlacementPolicies {
   // 202 response has a body, but it should not to match ArmCustomPatchAsync.
   // update is ArmCustomPatchAsync<PlacementPolicy, PlacementPolicyUpdate>;
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("Update a PlacementPolicy")
   @extension("x-ms-long-running-operation", true)
   @extension(
@@ -977,6 +982,7 @@ op ArmResourceActionNoContentAsyncNoRequestBody<
 // Just like ArmResourceActionAsyncBase, but with no request body.
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
 @autoRoute
 @extension("x-ms-long-running-operation", true)
 @extension(

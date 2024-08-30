@@ -142,7 +142,8 @@ interface Watchers {
   @action
   @post
   @armResourceAction(Watcher)
-  @extension("x-ms-long-running-operation", true)
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+
   @extension(
     "x-ms-long-running-operation-options",
     {
@@ -157,6 +158,7 @@ interface Watchers {
   @action
   @post
   @armResourceAction(Watcher)
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
