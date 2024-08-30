@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -229,8 +230,9 @@ model CheckQuotaAvailabilityResponse {
   @visibility("read")
   name?: string;
 
+  #suppress "deprecated" "Legacy flatten"
   @doc("Check quota availability response properties.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: CheckQuotaAvailabilityResponseProperties;
 }
 
@@ -245,7 +247,8 @@ model CheckQuotaAvailabilityResponseProperties {
 
 @doc("Request object of new quota for a quota bucket.")
 model QuotaBucketRequest {
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   @doc("Request object of new quota for a quota bucket.")
   properties?: QuotaBucketRequestProperties;
 }

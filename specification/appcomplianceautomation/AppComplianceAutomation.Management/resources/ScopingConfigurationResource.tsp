@@ -41,8 +41,8 @@ model ScopingConfigurationResource
   /**
    * ScopingConfiguration property.
    */
-  @extension("x-ms-client-flatten", true)
-  @extension("x-ms-client-name", "properties")
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties: ScopingConfigurationProperties;
 }
 

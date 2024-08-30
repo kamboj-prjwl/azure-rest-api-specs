@@ -650,7 +650,8 @@ model PrivateCloudUpdate {
   ...ManagedSystemAssignedIdentityProperty;
 
   @doc("The updatable properties of a private cloud resource")
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: PrivateCloudUpdateProperties;
 }
 
@@ -970,7 +971,8 @@ model ClusterUpdate {
   ...ResourceSkuProperty;
 
   @doc("The properties of a cluster resource that may be updated")
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: ClusterUpdateProperties;
 }
 
@@ -1787,7 +1789,8 @@ model PlacementPolicyProperties {
 @doc("An update of a DRS placement policy resource")
 model PlacementPolicyUpdate {
   @doc("The properties of a placement policy resource that may be updated")
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: PlacementPolicyUpdateProperties;
 }
 

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -36,7 +37,8 @@ model VirtualMachineInstanceUpdate
     "properties"
   >> {
   /** The update properties of the VirtualMachineInstance. */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: VirtualMachineInstanceUpdateProperties;
 }
 

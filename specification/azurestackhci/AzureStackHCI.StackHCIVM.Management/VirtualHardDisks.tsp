@@ -12,8 +12,8 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@doc("The virtual hard disk resource definition.")
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
+@doc("The virtual hard disk resource definition.")
 @extension("x-ms-azure-resource", true)
 model VirtualHardDisk is TrackedResource<VirtualHardDiskProperties> {
   @doc("Name of the virtual hard disk")

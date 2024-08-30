@@ -40,8 +40,8 @@ model WebhookResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Webhook property.
    */
-  @extension("x-ms-client-flatten", true)
-  @extension("x-ms-client-name", "properties")
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties: WebhookProperties; // Replace 'WebhookProperties' with the actual type
 }
 
