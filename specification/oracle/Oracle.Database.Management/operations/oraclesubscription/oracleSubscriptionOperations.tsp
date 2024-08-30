@@ -13,9 +13,9 @@ interface OracleSubscriptions
       OracleSubscription<Plan>,
       OracleSubscriptionProperties
     > {
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("List Cloud Account Details")
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  @Autorest.example(
     "./examples/oracleSubscriptions_listCloudAccountDetails.json",
     "List Cloud Account details for the Oracle Subscription"
   )
@@ -24,9 +24,9 @@ interface OracleSubscriptions
     CloudAccountDetails
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("List Saas Subscription Details")
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  @Autorest.example(
     "./examples/oracleSubscriptions_listSaasSubscriptionDetails.json",
     "List Saas Subscription details for the Oracle Subscription"
   )
@@ -35,9 +35,9 @@ interface OracleSubscriptions
     SaasSubscriptionDetails
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("List Activation Links")
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  @Autorest.example(
     "./examples/oracleSubscriptions_listActivationLinks.json",
     "List Activation Links for the Oracle Subscription"
   )
@@ -46,10 +46,10 @@ interface OracleSubscriptions
     ActivationLinks
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @added(Versions.v20240601_preview)
   @doc("Add Azure Subscriptions")
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  @Autorest.example(
     "./examples/oracleSubscriptions_addAzureSubscriptions.json",
     "Add Azure Subscriptions to the OracleSubscription"
   )

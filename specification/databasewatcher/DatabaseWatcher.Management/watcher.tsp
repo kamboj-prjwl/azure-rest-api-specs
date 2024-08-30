@@ -138,12 +138,11 @@ interface Watchers {
   listByResourceGroup is ArmResourceListByParent<Watcher>;
   listBySubscription is ArmListBySubscription<Watcher>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("The action to start monitoring all targets configured for a database watcher.")
   @action
   @post
   @armResourceAction(Watcher)
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
-
   @extension(
     "x-ms-long-running-operation-options",
     {
@@ -154,11 +153,11 @@ interface Watchers {
     ...ResourceInstanceParameters<Watcher>,
   ): ArmAcceptedLroResponse | ArmResponse<Watcher> | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("The action to stop monitoring all targets configured for a database watcher.")
   @action
   @post
   @armResourceAction(Watcher)
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",

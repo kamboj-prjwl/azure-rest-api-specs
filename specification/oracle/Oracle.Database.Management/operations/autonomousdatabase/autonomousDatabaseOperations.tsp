@@ -12,9 +12,9 @@ interface AutonomousDatabases
       AutonomousDatabaseBaseProperties
     > {
   //OCI switchover API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/SwitchoverAutonomousDatabase
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("Perform switchover action on Autonomous Database")
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  @Autorest.example(
     "./examples/autonomousDatabase_switchover.json",
     "Perform switchover action on Autonomous Database"
   )
@@ -25,9 +25,9 @@ interface AutonomousDatabases
   >;
 
   //OCI failover API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/FailOverAutonomousDatabase
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("Perform failover action on Autonomous Database")
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  @Autorest.example(
     "./examples/autonomousDatabase_failover.json",
     "Perform failover action on Autonomous Database"
   )
@@ -38,9 +38,9 @@ interface AutonomousDatabases
   >;
 
   //OCI generate wallet API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/GenerateAutonomousDatabaseWallet
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("Generate wallet action on Autonomous Database")
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  @Autorest.example(
     "./examples/autonomousDatabase_generateWallet.json",
     "Generate wallet action on Autonomous Database"
   )
@@ -51,9 +51,9 @@ interface AutonomousDatabases
   >;
 
   //OCI RestoreAutonomousDatabase API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/RestoreAutonomousDatabase
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("Restores an Autonomous Database based on the provided request parameters.")
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  @Autorest.example(
     "./examples/autonomousDatabase_restore.json",
     "Perform restore action on Autonomous Database"
   )
@@ -64,9 +64,9 @@ interface AutonomousDatabases
   >;
 
   //OCI ShrinkAutonomousDatabase API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/ShrinkAutonomousDatabase
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("This operation shrinks the current allocated storage down to the current actual used data storage.")
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  @Autorest.example(
     "./examples/autonomousDatabase_shrink.json",
     "Perform shrink action on Autonomous Database"
   )

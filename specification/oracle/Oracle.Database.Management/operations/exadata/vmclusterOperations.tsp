@@ -10,9 +10,9 @@ namespace Oracle.Database;
 @armResourceOperations
 interface CloudVmClusters
   extends OracleTrackedResource<CloudVmCluster, CloudVmClusterProperties> {
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("Add VMs to the VM Cluster")
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  @Autorest.example(
     "./examples/vmClusters_addVms.json",
     "Add VMs to VM Cluster"
   )
@@ -22,9 +22,9 @@ interface CloudVmClusters
     CloudVmCluster
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("Remove VMs from the VM Cluster")
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  @Autorest.example(
     "./examples/vmClusters_removeVms.json",
     "Remove VMs from VM Cluster"
   )
@@ -34,9 +34,9 @@ interface CloudVmClusters
     CloudVmCluster
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("List Private IP Addresses by the provided filter")
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  @Autorest.example(
     "./examples/vmClusters_listPrivateIpAddresses.json",
     "List Private IP Addresses for VM Cluster"
   )

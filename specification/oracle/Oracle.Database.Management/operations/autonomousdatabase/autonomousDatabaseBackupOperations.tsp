@@ -13,8 +13,8 @@ interface AutonomousDatabaseBackups
       AutonomousDatabaseBackup,
       AutonomousDatabaseBackupProperties
     > {
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
+  @Autorest.example(
     "./examples/autonomousDatabaseBackup_patch.json",
     "Patch Autonomous Database Backup."
   )
@@ -26,8 +26,8 @@ interface AutonomousDatabaseBackups
     >
   >;
 
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
+  @Autorest.example(
     "./examples/autonomousDatabaseBackup_listByParent.json",
     "List Autonomous Database Backups by Autonomous Database."
   )

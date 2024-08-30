@@ -14,8 +14,8 @@ interface VirtualNetworkAddresses
       VirtualNetworkAddressProperties
     > {
   // TODO: Swagger generator bug, cannot be extracted to interface
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
+  @Autorest.example(
     "./examples/virtualNetworkAddresses_listByParent.json",
     "List Virtual Network Addresses by VM Cluster"
   )

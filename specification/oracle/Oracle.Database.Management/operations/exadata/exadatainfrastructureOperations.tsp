@@ -13,9 +13,9 @@ interface CloudExadataInfrastructures
       CloudExadataInfrastructureProperties
     > {
   //OCI addStorageCapacityCloudExadataInfrastructure API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/CloudExadataInfrastructure/AddStorageCapacityCloudExadataInfrastructure
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("Perform add storage capacity on exadata infra")
- #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
- @Autorest.example(
+  @Autorest.example(
     "./examples/exaInfra_addStorageCapacity.json",
     "Perform add storage capacity on exadata infra"
   )
