@@ -16,10 +16,11 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 /** Microsoft.Nginx.NginxPlus Resource Provider management API. */
+#suppress "@azure-tools/typespec-azure-core/casing-style: The names of Namespace types must use PascalCase" "The casing style is defined by the Azure Resource Manager team."
 @armProviderNamespace
 @service(#{ title: "Microsoft.Nginx.NginxPlus management service" })
 @versioned(Versions)
-namespace Nginx.NginxPlus;
+namespace NGINX.NGINXPLUS;
 
 /** The available API versions. */
 enum Versions {
