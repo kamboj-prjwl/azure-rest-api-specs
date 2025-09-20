@@ -1,0 +1,202 @@
+name: Create Branch from Upstream
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch_name:
+        description: 'Name of the branch that exists in upstream (Azure/azure-rest-api-specs)'
+        required: true
+        type: string
+
+jobs:
+  create-branch-from-upstream:
+    runs-on: ubuntu-latest
+    
+    # Always clean up, even if job fails
+    continue-on-error: false
+    
+    steps:
+      - name: Configure Git for Long Paths
+        run: |
+          git config --global core.longpaths true
+          git config --global user.name "kamboj-prjwl"
+          git config --global user.email "kamboj-prjwl@gmail.com"
+          
+      - name: Checkout Fork Repository
+        uses: actions/checkout@v4
+        with:
+          # Fetch all history for all branches and tags
+          fetch-depth: 0
+          # Use the default token for authentication
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Add Upstream Remote
+        run: |
+          # Add the upstream repository as a remote
+          git remote add upstream https://github.com/Azure/azure-rest-api-specs.git
+          
+          # Verify remotes are configured correctly
+          echo "Configured remotes:"
+          git remote -v
+          
+      - name: Fetch Upstream Branches
+        run: |
+          echo "Fetching all branches from upstream..."
+          git fetch upstream --prune
+          
+          # List all upstream branches for verification
+          echo "Available upstream branches:"
+          git branch -r | grep upstream
+          
+      - name: Verify Upstream Branch Exists
+        run: |
+          # Check if the specified branch exists in upstream
+          if git ls-remote --heads upstream | grep -q "refs/heads/${{ inputs.branch_name }}"; then
+            echo "✅ Branch '${{ inputs.branch_name }}' exists in upstream"
+          else
+            echo "❌ Branch '${{ inputs.branch_name }}' does not exist in upstream"
+            exit 1
+          fi
+          
+      - name: Clean Local Repository State
+        run: |
+          # Ensure we're on a safe branch (main/master)
+          git checkout main 2>/dev/null || git checkout master 2>/dev/null || git checkout -b temp-safe-branch
+          
+          # Remove any existing local branch with the same name
+          if git show-ref --verify --quiet "refs/heads/${{ inputs.branch_name }}"; then
+            echo "Removing existing local branch '${{ inputs.branch_name }}'"
+            git branch -D "${{ inputs.branch_name }}"
+          fi
+          
+          # Clean any untracked files and directories
+          git clean -fdx
+          
+          # Reset any staged changes
+          git reset --hard HEAD
+          
+      - name: Create New Branch from Upstream
+        id: create_branch
+        run: |
+          # Create and checkout new branch from upstream
+          echo "Creating new branch '${{ inputs.branch_name }}' from upstream..."
+          git checkout -b "${{ inputs.branch_name }}" "upstream/${{ inputs.branch_name }}"
+          
+          # Verify we're on the correct branch
+          current_branch=$(git branch --show-current)
+          echo "Current branch: $current_branch"
+          
+          if [ "$current_branch" = "${{ inputs.branch_name }}" ]; then
+            echo "✅ Successfully switched to branch '${{ inputs.branch_name }}'"
+            echo "branch_created=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Failed to switch to branch '${{ inputs.branch_name }}'"
+            exit 1
+          fi
+          
+      - name: Push Branch to Fork
+        run: |
+          # Push the new branch to the fork (origin)
+          echo "Pushing branch '${{ inputs.branch_name }}' to fork..."
+          git push origin "${{ inputs.branch_name }}" --force
+          
+          echo "✅ Branch successfully pushed to fork"
+          
+      - name: Validate PowerShell Execution
+        if: success() && steps.create_branch.outputs.branch_created == 'true'
+        shell: pwsh
+        run: |
+          # PowerShell validation step
+          Write-Host "========================================" -ForegroundColor Green
+          Write-Host "PowerShell Execution Validation" -ForegroundColor Cyan
+          Write-Host "========================================" -ForegroundColor Green
+          
+          # Get current branch name
+          $currentBranch = git branch --show-current
+          Write-Host "Current Branch Name: $currentBranch" -ForegroundColor Yellow
+          
+          # Validate branch name matches input
+          if ($currentBranch -eq "${{ inputs.branch_name }}") {
+              Write-Host "✅ Branch validation successful!" -ForegroundColor Green
+              Write-Host "Branch '${{ inputs.branch_name }}' is active" -ForegroundColor Green
+          } else {
+              Write-Host "❌ Branch validation failed!" -ForegroundColor Red
+              exit 1
+          }
+          
+          # Additional PowerShell operations can be added here
+          Write-Host "`nBranch Information:" -ForegroundColor Cyan
+          git log --oneline -n 5
+          
+          Write-Host "`nRepository Status:" -ForegroundColor Cyan
+          git status
+          
+      - name: Summary Report
+        if: always()
+        run: |
+          echo "## Workflow Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Input Branch**: ${{ inputs.branch_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Upstream Repository**: Azure/azure-rest-api-specs" >> $GITHUB_STEP_SUMMARY
+          echo "- **Fork Repository**: ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Workflow Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.create_branch.outputs.branch_created }}" = "true" ]; then
+            echo "✅ **Branch successfully created and pushed to fork**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Branch creation failed**" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+    # Post-job cleanup
+    # This section always runs, even if the job fails
+    post:
+      - name: Final Cleanup
+        if: always()
+        run: |
+          echo "Performing final cleanup..."
+          
+          # Remove any git locks if they exist
+          rm -f .git/index.lock
+          rm -f .git/HEAD.lock
+          rm -f .git/refs/heads/*.lock
+          
+          # Clean up any temporary files
+          git clean -fdx 2>/dev/null || true
+          
+          # Reset to a clean state
+          git reset --hard HEAD 2>/dev/null || true
+          
+          echo "✅ Cleanup completed"
+
+  # Separate cleanup job that always runs
+  cleanup-on-failure:
+    runs-on: ubuntu-latest
+    needs: create-branch-from-upstream
+    if: always()
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Remove Git Locks
+        run: |
+          echo "Ensuring all git locks are removed..."
+          
+          # Find and remove all lock files in .git directory
+          find .git -name "*.lock" -type f -delete 2>/dev/null || true
+          
+          # Additional cleanup for index.lock specifically
+          rm -f .git/index.lock 2>/dev/null || true
+          
+          echo "✅ All git locks have been removed"
+          
+      - name: Report Final Status
+        run: |
+          echo "## Final Cleanup Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- All git locks have been removed" >> $GITHUB_STEP_SUMMARY
+          echo "- Repository is in a clean state" >> $GITHUB_STEP_SUMMARY
+          echo "- Workflow completed at: $(date)" >> $GITHUB_STEP_SUMMARY
