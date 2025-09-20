@@ -7,6 +7,14 @@ on:
         description: 'Name of the branch that exists in upstream (Azure/azure-rest-api-specs)'
         required: true
         type: string
+      new_api_version:
+        description: 'New API version (e.g., 2024-09-01)'
+        required: true
+        type: string
+      latest_api_version:
+        description: 'Latest API version to copy from (e.g., 2024-06-01)'
+        required: true
+        type: string
 
 jobs:
   create-branch-from-upstream:
@@ -133,6 +141,50 @@ jobs:
           Write-Host "`nRepository Status:" -ForegroundColor Cyan
           git status
           
+      - name: Execute Copy-ApiVersion Script
+        if: success() && steps.create_branch.outputs.branch_created == 'true'
+        shell: pwsh
+        run: |
+          # Execute the Copy-ApiVersion.ps1 script with provided parameters
+          Write-Host "========================================" -ForegroundColor Blue
+          Write-Host "Executing Copy-ApiVersion Script" -ForegroundColor Cyan
+          Write-Host "========================================" -ForegroundColor Blue
+          
+          # Display the parameters that will be used
+          Write-Host "Script Parameters:" -ForegroundColor Yellow
+          Write-Host "  - New API Version: ${{ inputs.new_api_version }}" -ForegroundColor White
+          Write-Host "  - Latest API Version: ${{ inputs.latest_api_version }}" -ForegroundColor White
+          Write-Host "  - Service: network" -ForegroundColor White
+          Write-Host "  - Type: resource-manager" -ForegroundColor White
+          Write-Host "  - Provider: Microsoft.Network" -ForegroundColor White
+          
+          # Check if the script exists
+          $scriptPath = ".\eng\scripts\Copy-ApiVersion.ps1"
+          if (Test-Path $scriptPath) {
+              Write-Host "`n✅ Script found at: $scriptPath" -ForegroundColor Green
+              
+              # Execute the script
+              Write-Host "`nExecuting Copy-ApiVersion script..." -ForegroundColor Cyan
+              try {
+                  & $scriptPath network resource-manager Microsoft.Network "stable/${{ inputs.new_api_version }}" "stable/${{ inputs.latest_api_version }}"
+                  Write-Host "`n✅ Copy-ApiVersion script executed successfully!" -ForegroundColor Green
+              }
+              catch {
+                  Write-Host "`n❌ Error executing Copy-ApiVersion script:" -ForegroundColor Red
+                  Write-Host $_.Exception.Message -ForegroundColor Red
+                  throw
+              }
+          } else {
+              Write-Host "`n❌ Script not found at: $scriptPath" -ForegroundColor Red
+              Write-Host "Available files in eng/scripts directory:" -ForegroundColor Yellow
+              if (Test-Path ".\eng\scripts\") {
+                  Get-ChildItem ".\eng\scripts\" -Name | ForEach-Object { Write-Host "  - $_" -ForegroundColor White }
+              } else {
+                  Write-Host "  eng/scripts directory not found" -ForegroundColor Red
+              }
+              throw "Copy-ApiVersion.ps1 script not found"
+          }
+          
       - name: Additional PowerShell Commands Example
         if: success() && steps.create_branch.outputs.branch_created == 'true'
         shell: pwsh
@@ -154,11 +206,45 @@ jobs:
           Write-Host "`nRepository Information:" -ForegroundColor Yellow
           $repoInfo | Format-Table -AutoSize
           
+          # Check if any changes were made by the Copy-ApiVersion script
+          Write-Host "`nChecking for changes made by Copy-ApiVersion script:" -ForegroundColor Yellow
+          $gitStatus = git status --porcelain
+          if ($gitStatus) {
+              Write-Host "✅ Changes detected:" -ForegroundColor Green
+              git status
+              
+              Write-Host "`nFiles that were modified/added:" -ForegroundColor Cyan
+              $gitStatus | ForEach-Object { Write-Host "  $_" -ForegroundColor White }
+          } else {
+              Write-Host "ℹ️ No changes detected" -ForegroundColor Blue
+          }
+          
           # List files in root directory
           Write-Host "`nFiles in repository root:" -ForegroundColor Yellow
           Get-ChildItem -Path . -Name | Select-Object -First 10
           
           Write-Host "`n✅ PowerShell execution completed successfully!" -ForegroundColor Green
+          
+      - name: Commit Changes (if any)
+        if: success() && steps.create_branch.outputs.branch_created == 'true'
+        run: |
+          # Check if there are any changes to commit
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "📝 Changes detected, committing them..."
+            
+            # Add all changes
+            git add .
+            
+            # Commit with a descriptive message
+            git commit -m "Copy API version from stable/${{ inputs.latest_api_version }} to stable/${{ inputs.new_api_version }} for Microsoft.Network"
+            
+            # Push the changes
+            git push origin "${{ inputs.branch_name }}"
+            
+            echo "✅ Changes committed and pushed successfully"
+          else
+            echo "ℹ️ No changes to commit"
+          fi
           
       - name: Summary Report
         if: always()
@@ -166,6 +252,8 @@ jobs:
           echo "## Workflow Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "- **Input Branch**: ${{ inputs.branch_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **New API Version**: ${{ inputs.new_api_version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Latest API Version**: ${{ inputs.latest_api_version }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Upstream Repository**: Azure/azure-rest-api-specs" >> $GITHUB_STEP_SUMMARY
           echo "- **Fork Repository**: ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Workflow Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
@@ -174,6 +262,7 @@ jobs:
           
           if [ "${{ steps.create_branch.outputs.branch_created }}" = "true" ]; then
             echo "✅ **Branch successfully created and pushed to fork**" >> $GITHUB_STEP_SUMMARY
+            echo "✅ **Copy-ApiVersion script executed**" >> $GITHUB_STEP_SUMMARY
           else
             echo "❌ **Branch creation failed or not completed**" >> $GITHUB_STEP_SUMMARY
           fi
