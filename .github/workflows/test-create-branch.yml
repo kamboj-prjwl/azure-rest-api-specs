@@ -12,9 +12,6 @@ jobs:
   create-branch-from-upstream:
     runs-on: ubuntu-latest
     
-    # Always clean up, even if job fails
-    continue-on-error: false
-    
     steps:
       - name: Configure Git for Long Paths
         run: |
@@ -75,6 +72,11 @@ jobs:
           # Reset any staged changes
           git reset --hard HEAD
           
+          # Remove any existing locks
+          rm -f .git/index.lock
+          rm -f .git/HEAD.lock
+          find .git/refs -name "*.lock" -type f -delete 2>/dev/null || true
+          
       - name: Create New Branch from Upstream
         id: create_branch
         run: |
@@ -131,6 +133,33 @@ jobs:
           Write-Host "`nRepository Status:" -ForegroundColor Cyan
           git status
           
+      - name: Additional PowerShell Commands Example
+        if: success() && steps.create_branch.outputs.branch_created == 'true'
+        shell: pwsh
+        run: |
+          # Example of additional PowerShell commands you can run
+          Write-Host "========================================" -ForegroundColor Blue
+          Write-Host "Running Additional PowerShell Commands" -ForegroundColor Cyan
+          Write-Host "========================================" -ForegroundColor Blue
+          
+          # Get repository information
+          $repoInfo = @{
+              Branch = git branch --show-current
+              LastCommit = git log -1 --pretty=format:"%H"
+              Author = git log -1 --pretty=format:"%an"
+              Date = git log -1 --pretty=format:"%ad"
+              Message = git log -1 --pretty=format:"%s"
+          }
+          
+          Write-Host "`nRepository Information:" -ForegroundColor Yellow
+          $repoInfo | Format-Table -AutoSize
+          
+          # List files in root directory
+          Write-Host "`nFiles in repository root:" -ForegroundColor Yellow
+          Get-ChildItem -Path . -Name | Select-Object -First 10
+          
+          Write-Host "`n✅ PowerShell execution completed successfully!" -ForegroundColor Green
+          
       - name: Summary Report
         if: always()
         run: |
@@ -140,37 +169,36 @@ jobs:
           echo "- **Upstream Repository**: Azure/azure-rest-api-specs" >> $GITHUB_STEP_SUMMARY
           echo "- **Fork Repository**: ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Workflow Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Timestamp**: $(date)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           
           if [ "${{ steps.create_branch.outputs.branch_created }}" = "true" ]; then
             echo "✅ **Branch successfully created and pushed to fork**" >> $GITHUB_STEP_SUMMARY
           else
-            echo "❌ **Branch creation failed**" >> $GITHUB_STEP_SUMMARY
+            echo "❌ **Branch creation failed or not completed**" >> $GITHUB_STEP_SUMMARY
           fi
           
-    # Post-job cleanup
-    # This section always runs, even if the job fails
-    post:
-      - name: Final Cleanup
+      - name: Cleanup on Success or Failure
         if: always()
         run: |
-          echo "Performing final cleanup..."
+          echo "Performing cleanup..."
           
           # Remove any git locks if they exist
           rm -f .git/index.lock
           rm -f .git/HEAD.lock
           rm -f .git/refs/heads/*.lock
+          find .git -name "*.lock" -type f -delete 2>/dev/null || true
           
           # Clean up any temporary files
           git clean -fdx 2>/dev/null || true
           
-          # Reset to a clean state
+          # Reset to a clean state (only if we can)
           git reset --hard HEAD 2>/dev/null || true
           
           echo "✅ Cleanup completed"
 
-  # Separate cleanup job that always runs
-  cleanup-on-failure:
+  # Separate cleanup job that always runs to ensure locks are removed
+  cleanup-locks:
     runs-on: ubuntu-latest
     needs: create-branch-from-upstream
     if: always()
@@ -181,22 +209,43 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           
-      - name: Remove Git Locks
+      - name: Remove All Git Locks
         run: |
           echo "Ensuring all git locks are removed..."
           
           # Find and remove all lock files in .git directory
-          find .git -name "*.lock" -type f -delete 2>/dev/null || true
+          if [ -d ".git" ]; then
+            find .git -type f -name "*.lock" -delete 2>/dev/null || true
+            
+            # Specifically target common lock locations
+            rm -f .git/index.lock 2>/dev/null || true
+            rm -f .git/HEAD.lock 2>/dev/null || true
+            rm -rf .git/refs/heads/*.lock 2>/dev/null || true
+            rm -rf .git/refs/remotes/*/*.lock 2>/dev/null || true
+            
+            echo "✅ All git locks have been removed"
+          else
+            echo "⚠️ .git directory not found"
+          fi
           
-          # Additional cleanup for index.lock specifically
-          rm -f .git/index.lock 2>/dev/null || true
-          
-          echo "✅ All git locks have been removed"
-          
-      - name: Report Final Status
+      - name: Verify Lock Removal
         run: |
-          echo "## Final Cleanup Report" >> $GITHUB_STEP_SUMMARY
+          echo "Verifying no locks remain..."
+          
+          lock_count=$(find .git -name "*.lock" 2>/dev/null | wc -l || echo "0")
+          
+          if [ "$lock_count" -eq 0 ]; then
+            echo "✅ Verified: No git locks found"
+          else
+            echo "⚠️ Warning: $lock_count lock file(s) still found"
+            find .git -name "*.lock" 2>/dev/null || true
+          fi
+          
+      - name: Final Status Report
+        run: |
+          echo "## Cleanup Job Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- All git locks have been removed" >> $GITHUB_STEP_SUMMARY
-          echo "- Repository is in a clean state" >> $GITHUB_STEP_SUMMARY
-          echo "- Workflow completed at: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Previous Job Status**: ${{ needs.create-branch-from-upstream.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Cleanup Status**: Completed" >> $GITHUB_STEP_SUMMARY
+          echo "- **All git locks removed**: ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- **Cleanup completed at**: $(date)" >> $GITHUB_STEP_SUMMARY
