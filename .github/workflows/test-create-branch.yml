@@ -222,11 +222,7 @@ jobs:
           ## Next Steps
           Please review the changes and merge when ready." \
             --head "${{ inputs.branch_name }}" \
-            --base "main" \
-            --assignee "kamboj-prjwl" \
-            --label "api-version-copy" \
-            --label "microsoft.network" \
-            --label "automated"
+            --base "main"
           
           echo "✅ Pull request created successfully!"
           
