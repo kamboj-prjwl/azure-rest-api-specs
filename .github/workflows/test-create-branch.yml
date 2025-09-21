@@ -197,6 +197,18 @@ jobs:
           
           echo "✅ All changes pushed successfully to branch '${{ inputs.branch_name }}'"
           
+      # Add GitHub CLI setup step
+      - name: Setup GitHub CLI
+        if: success() && steps.create_branch.outputs.branch_created == 'true'
+        run: |
+          # GitHub CLI is pre-installed on ubuntu-latest
+          # Verify installation and authenticate
+          gh --version
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+          
+          # Verify authentication
+          gh auth status
+          
       - name: Create Pull Request
         if: success() && steps.create_branch.outputs.branch_created == 'true'
         run: |
@@ -226,12 +238,13 @@ jobs:
           ## Next Steps
           Please review the changes and merge when ready." \
             --head "${{ inputs.branch_name }}" \
-            --base "main"
+            --base "main" \
+            --repo "${{ github.repository }}"
           
           echo "✅ Pull request created successfully!"
           
           # Get the PR URL for the summary
-          PR_URL=$(gh pr view "${{ inputs.branch_name }}" --json url --jq '.url')
+          PR_URL=$(gh pr view "${{ inputs.branch_name }}" --repo "${{ github.repository }}" --json url --jq '.url')
           echo "🔗 Pull Request URL: $PR_URL"
           echo "PR_URL=$PR_URL" >> $GITHUB_ENV
         env:
