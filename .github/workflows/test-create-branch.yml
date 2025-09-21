@@ -145,8 +145,6 @@ jobs:
         if: success() && steps.create_branch.outputs.branch_created == 'true'
         shell: pwsh
         run: |
-          # Execute the Copy-ApiVersion.ps1 script with provided parameters
-          Write-Host "========================================" -ForegroundColor Blue
           Write-Host "Executing Copy-ApiVersion Script" -ForegroundColor Cyan
           Write-Host "========================================" -ForegroundColor Blue
           
@@ -185,66 +183,59 @@ jobs:
               throw "Copy-ApiVersion.ps1 script not found"
           }
           
-      - name: Additional PowerShell Commands Example
-        if: success() && steps.create_branch.outputs.branch_created == 'true'
-        shell: pwsh
-        run: |
-          # Example of additional PowerShell commands you can run
-          Write-Host "========================================" -ForegroundColor Blue
-          Write-Host "Running Additional PowerShell Commands" -ForegroundColor Cyan
-          Write-Host "========================================" -ForegroundColor Blue
-          
-          # Get repository information
-          $repoInfo = @{
-              Branch = git branch --show-current
-              LastCommit = git log -1 --pretty=format:"%H"
-              Author = git log -1 --pretty=format:"%an"
-              Date = git log -1 --pretty=format:"%ad"
-              Message = git log -1 --pretty=format:"%s"
-          }
-          
-          Write-Host "`nRepository Information:" -ForegroundColor Yellow
-          $repoInfo | Format-Table -AutoSize
-          
-          # Check if any changes were made by the Copy-ApiVersion script
-          Write-Host "`nChecking for changes made by Copy-ApiVersion script:" -ForegroundColor Yellow
-          $gitStatus = git status --porcelain
-          if ($gitStatus) {
-              Write-Host "✅ Changes detected:" -ForegroundColor Green
-              git status
-              
-              Write-Host "`nFiles that were modified/added:" -ForegroundColor Cyan
-              $gitStatus | ForEach-Object { Write-Host "  $_" -ForegroundColor White }
-          } else {
-              Write-Host "ℹ️ No changes detected" -ForegroundColor Blue
-          }
-          
-          # List files in root directory
-          Write-Host "`nFiles in repository root:" -ForegroundColor Yellow
-          Get-ChildItem -Path . -Name | Select-Object -First 10
-          
-          Write-Host "`n✅ PowerShell execution completed successfully!" -ForegroundColor Green
-          
-      - name: Commit Changes (if any)
+      - name: Push Changes to Branch
         if: success() && steps.create_branch.outputs.branch_created == 'true'
         run: |
-          # Check if there are any changes to commit
-          if [ -n "$(git status --porcelain)" ]; then
-            echo "📝 Changes detected, committing them..."
-            
-            # Add all changes
-            git add .
-            
-            # Commit with a descriptive message
-            git commit -m "Copy API version from stable/${{ inputs.latest_api_version }} to stable/${{ inputs.new_api_version }} for Microsoft.Network"
-            
-            # Push the changes
-            git push origin "${{ inputs.branch_name }}"
-            
-            echo "✅ Changes committed and pushed successfully"
-          else
-            echo "ℹ️ No changes to commit"
-          fi
+          echo "📤 Pushing all changes to branch '${{ inputs.branch_name }}'..."
+          
+          # Push the changes (changes were already committed in PowerShell step)
+          git push origin "${{ inputs.branch_name }}" --force
+          
+          echo "✅ All changes pushed successfully to branch '${{ inputs.branch_name }}'"
+          
+      - name: Create Pull Request
+        if: success() && steps.create_branch.outputs.branch_created == 'true'
+        run: |
+          echo "🔀 Creating pull request from '${{ inputs.branch_name }}' to 'main'..."
+          
+          # Create pull request using GitHub CLI
+          gh pr create \
+            --title "Copy API version from stable/${{ inputs.latest_api_version }} to stable/${{ inputs.new_api_version }} for Microsoft.Network" \
+            --body "## Summary
+          
+          This PR copies the API version from \`stable/${{ inputs.latest_api_version }}\` to \`stable/${{ inputs.new_api_version }}\` for Microsoft.Network.
+          
+          ## Changes Made
+          - Executed Copy-ApiVersion.ps1 script with the following parameters:
+            - Service: network
+            - Type: resource-manager  
+            - Provider: Microsoft.Network
+            - New API Version: stable/${{ inputs.new_api_version }}
+            - Source API Version: stable/${{ inputs.latest_api_version }}
+          
+          ## Workflow Details
+          - **Source Branch**: ${{ inputs.branch_name }}
+          - **Upstream Repository**: Azure/azure-rest-api-specs
+          - **Generated by**: GitHub Actions workflow
+          - **Timestamp**: $(date)
+          
+          ## Next Steps
+          Please review the changes and merge when ready." \
+            --head "${{ inputs.branch_name }}" \
+            --base "main" \
+            --assignee "kamboj-prjwl" \
+            --label "api-version-copy" \
+            --label "microsoft.network" \
+            --label "automated"
+          
+          echo "✅ Pull request created successfully!"
+          
+          # Get the PR URL for the summary
+          PR_URL=$(gh pr view "${{ inputs.branch_name }}" --json url --jq '.url')
+          echo "🔗 Pull Request URL: $PR_URL"
+          echo "PR_URL=$PR_URL" >> $GITHUB_ENV
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Summary Report
         if: always()
@@ -262,7 +253,13 @@ jobs:
           
           if [ "${{ steps.create_branch.outputs.branch_created }}" = "true" ]; then
             echo "✅ **Branch successfully created and pushed to fork**" >> $GITHUB_STEP_SUMMARY
-            echo "✅ **Copy-ApiVersion script executed**" >> $GITHUB_STEP_SUMMARY
+            echo "✅ **Copy-ApiVersion script executed and changes committed**" >> $GITHUB_STEP_SUMMARY
+            echo "✅ **Changes pushed to branch**" >> $GITHUB_STEP_SUMMARY
+            if [ ! -z "$PR_URL" ]; then
+              echo "✅ **Pull request created**: [$PR_URL]($PR_URL)" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "⚠️ **Pull request creation status unknown**" >> $GITHUB_STEP_SUMMARY
+            fi
           else
             echo "❌ **Branch creation failed or not completed**" >> $GITHUB_STEP_SUMMARY
           fi
